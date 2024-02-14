@@ -9,5 +9,5 @@ Craps on Discord
 
 ## TODO
 
-1. Text commands (non-eval)
-2. Discord bot
+1. Environment setup
+2. Discord commands

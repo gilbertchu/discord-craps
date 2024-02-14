@@ -1,6 +1,3 @@
-// import CrapsPlayer from "./libs/CrapsPlayer.js"
-// import Craps from "./libs/Craps.js"
-
 const p1 = import('./libs/CrapsPlayer.mjs')
 const p2 = import('./libs/Craps.mjs')
 
