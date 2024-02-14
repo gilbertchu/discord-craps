@@ -1,5 +1,5 @@
-import CrapsPlayer from "./CrapsPlayer.js"
-import CrapsBets from "./CrapsBets.js"
+import CrapsPlayer from "./CrapsPlayer.mjs"
+import CrapsBets from "./CrapsBets.mjs"
 
 export default class Craps {
   static point = null

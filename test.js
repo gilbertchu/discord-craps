@@ -1,5 +1,5 @@
-import CrapsPlayer from "./libs/CrapsPlayer.js"
-import Craps from "./libs/Craps.js"
+import CrapsPlayer from "./libs/CrapsPlayer.mjs"
+import Craps from "./libs/Craps.mjs"
 
 const p = new CrapsPlayer('G', 200)
 Craps.addPlayer(p)
