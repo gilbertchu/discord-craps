@@ -1,0 +1,24 @@
+{
+  "name": "discord-craps",
+  "version": "0.0.1",
+  "description": "Craps on discord",
+  "main": "test.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gilbertchu/discord-craps.git"
+  },
+  "keywords": [
+    "discord",
+    "craps"
+  ],
+  "author": "Gilbert Chu",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/gilbertchu/discord-craps/issues"
+  },
+  "homepage": "https://github.com/gilbertchu/discord-craps#readme",
+  "type": "module"
+}
