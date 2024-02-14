@@ -54,6 +54,11 @@ export default class Craps {
     }
   }
 
+  static status() {
+    const status = this.point == null ? `COME OUT ROLL` : `POINT ESTABLISHED - ${this.point}`
+    return `< CURRENTLY ON: ${status} >`
+  }
+
   static #rollDie() {
     return Math.floor(Math.random() * 6 + 1)
   }

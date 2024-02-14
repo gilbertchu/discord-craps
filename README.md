@@ -11,3 +11,8 @@ Craps on Discord
 
 1. Environment setup
 2. Discord commands
+
+### Considerations
+
+- Need to convert console logging to discord messages with proper grouping and formatting
+- Server considerations (hosting, deployment, administration, etc.)
