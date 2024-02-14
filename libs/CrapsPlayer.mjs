@@ -158,8 +158,8 @@ export default class CrapsPlayer {
         const remainder = bet % CrapsPlayer.#aliases[name].length
         if (remainder) return `Bet ${name} ${bet} not divisible by ${CrapsPlayer.#aliases[name].length}`
         const subBet = bet / CrapsPlayer.#aliases[name].length
-        const res = CrapsPlayer.#aliases[name].map(subName => this.bet(subName, subBet))
-        return res
+        const res = CrapsPlayer.#aliases[name].map(subName => this.bet(subName, subBet)).filter(v => typeof v !== 'undefined')
+        return res.length ? res : res?.undefined
       } else {
         return this.bet(CrapsPlayer.#aliases[name], bet)
       }
@@ -204,7 +204,6 @@ export default class CrapsPlayer {
       console.log(this.name,`bet *${name}* ${bet}`)
     }
     this.#adjustBet(name, bet)
-    return true
   }
 
   resolveBet(name, outcome) {
