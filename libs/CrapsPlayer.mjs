@@ -164,6 +164,8 @@ export default class CrapsPlayer {
         return this.bet(CrapsPlayer.#aliases[name], bet)
       }
     }
+    const formattedName = name.replaceAll(' ', '').toLowerCase()
+    name = Object.keys(this.bets).find(v => v.toLowerCase() === formattedName)
     if (CrapsPlayer.#minBets.includes(name)) {
       if (CrapsPlayer.#checkMin(name, bet)) return `This bet requires minimum ${CrapsPlayer.#min}${name.startsWith('buy') || name.startsWith('lay') ? ' (+ vig 5%)' : ''}.`
     } else if (!CrapsPlayer.#noMinBets.includes(name)) {
