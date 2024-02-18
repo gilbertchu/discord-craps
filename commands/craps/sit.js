@@ -22,6 +22,7 @@ const sit = {
     const res = addPlayer(interaction.user)
     const reply = res ? `Joined the table! (chips: ${res.bank})` : 'Already sitting at the table!'
     await interaction.editReply(reply)
+    if (res) return `**${interaction.user.username}** joined the table!`
   },
 };
 

@@ -28,11 +28,11 @@ const bet = {
       if (cleared) {
         await interaction.editReply(`Removed bet ${formattedType} ${cleared}.`)
         // await interaction.followUp(`${interaction.user.username} REMOVED BET ${formattedType} ${cleared}`)
-        msg = `${interaction.user.username} REMOVED BET ${formattedType} ${cleared}`
+        msg = `**${interaction.user.username}** REMOVED BET ${formattedType} ${cleared}`
       } else {
         await interaction.editReply(`Placed bet ${formattedType} ${amount}.`)
         // await interaction.followUp(`${interaction.user.username} BET ${formattedType} ${amount}`)
-        msg = `${interaction.user.username} BET ${formattedType} ${amount}`
+        msg = `**${interaction.user.username}** BET ${formattedType} ${amount}`
       }
     } else {
       await interaction.editReply(res)
