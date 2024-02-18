@@ -150,7 +150,7 @@ export default class CrapsPlayer {
 
   bet(name, rawBet) {
     const bet = typeof rawBet === 'number' ? rawBet : Number.parseInt(rawBet)
-    if (Number.isNaN(bet)) return `Invalid bet ("${rawBet}" not a valid amount)`
+    if (Number.isNaN(bet) || bet < 0 || !Number.isInteger(bet)) return `Invalid bet ("${rawBet}" not a valid amount)`
     if (bet > CrapsPlayer.#max) return `Cannot bet more than absolute max (${CrapsPlayer.#max}).`
     if (bet > this.bank) return `Not enough money! (${this.bank} of ${bet})`
     if (Object.keys(CrapsPlayer.#aliases).includes(name)) {
@@ -159,7 +159,7 @@ export default class CrapsPlayer {
         if (remainder) return `Bet ${name} ${bet} not divisible by ${CrapsPlayer.#aliases[name].length}`
         const subBet = bet / CrapsPlayer.#aliases[name].length
         const res = CrapsPlayer.#aliases[name].map(subName => this.bet(subName, subBet)).filter(v => typeof v !== 'undefined')
-        return res.length ? res : res?.undefined
+        return res.length ? res.join('\n') : (bet ? ['Hard Ways', false] : `Cleared Hard Ways.`)
       } else {
         return this.bet(CrapsPlayer.#aliases[name], bet)
       }
@@ -205,7 +205,10 @@ export default class CrapsPlayer {
     } else {
       console.log(this.name,`bet *${name}* ${bet}`)
     }
+    const old = this.bets[name]
     this.#adjustBet(name, bet)
+    const cleared = bet === 0 && old
+    return [CrapsPlayer.camelToFull(name), cleared]
   }
 
   resolveBet(name, outcome) {

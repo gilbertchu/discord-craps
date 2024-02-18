@@ -2,18 +2,18 @@
 const { Client, Collection, Events, GatewayIntentBits } = await import('discord.js');
 const { default: {clientId, guildId, token} } = await import('./config.json', {assert: {type: "json"}});
 const { REST, Routes } = await import('discord.js');
-import userCommand from './commands/user.js'
-import sitCommand from './commands/sit.js'
-
 
 // Create a new client instance
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.commands = new Collection();
-client.commands.set(userCommand.data.name, userCommand);
-client.commands.set(sitCommand.data.name, sitCommand);
 const commands = []
-commands.push(userCommand.data.toJSON())
+
+import sitCommand from './commands/sit.js'
+import betCommand from './commands/bet.js'
+client.commands.set(sitCommand.data.name, sitCommand);
+client.commands.set(betCommand.data.name, betCommand);
 commands.push(sitCommand.data.toJSON())
+commands.push(betCommand.data.toJSON())
 
 // When the client is ready, run this code (only once).
 // The distinction between `client: Client<boolean>` and `readyClient: Client<true>` is important for TypeScript developers.
