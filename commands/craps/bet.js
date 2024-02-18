@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from 'discord.js'
-import Craps from "../libs/Craps.mjs"
+import Craps from "../../libs/Craps.mjs"
 
 const playerBet = function(user, type, amount) {
   const { id, username } = user
@@ -18,24 +18,26 @@ const bet = {
     // interaction.user is the object representing the User who ran the command
     // interaction.member is the GuildMember object, which represents the user in the specific guild
     // await interaction.reply(`This command was run by ${interaction.user.username}, who joined on ${interaction.member.joinedAt}.`);
-    // console.log(interaction)
     await interaction.deferReply({ephemeral: true})
-    console.log(interaction)
     const type = interaction.options.getString('type')
     const amount = interaction.options.getString('amount')
     const res = playerBet(interaction.user, type, amount)
+    let msg
     if (Array.isArray(res)) {
       const [formattedType, cleared] = res
       if (cleared) {
         await interaction.editReply(`Removed bet ${formattedType} ${cleared}.`)
-        await interaction.followUp(`${interaction.user.username} REMOVED BET ${formattedType} ${cleared}`)
+        // await interaction.followUp(`${interaction.user.username} REMOVED BET ${formattedType} ${cleared}`)
+        msg = `${interaction.user.username} REMOVED BET ${formattedType} ${cleared}`
       } else {
         await interaction.editReply(`Placed bet ${formattedType} ${amount}.`)
-        await interaction.followUp(`${interaction.user.username} BET ${formattedType} ${amount}`)
+        // await interaction.followUp(`${interaction.user.username} BET ${formattedType} ${amount}`)
+        msg = `${interaction.user.username} BET ${formattedType} ${amount}`
       }
     } else {
       await interaction.editReply(res)
     }
+    return msg
   },
 };
 
