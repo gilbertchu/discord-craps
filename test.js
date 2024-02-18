@@ -2,7 +2,7 @@ import CrapsPlayer from "./libs/CrapsPlayer.mjs"
 import Craps from "./libs/Craps.mjs"
 
 const p = new CrapsPlayer('G', 200)
-Craps.addPlayer(p)
+Craps.addPlayer(123, p)
 p.bet('pass', 5)
 p.bet('hardways', 4)
 p.bet('ce', 1)

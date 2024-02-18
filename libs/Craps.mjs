@@ -3,10 +3,10 @@ import CrapsBets from "./CrapsBets.mjs"
 
 export default class Craps {
   static point = null
-  static players = []
+  static players = {}
 
-  static addPlayer(player) {
-    this.players.push(player)
+  static addPlayer(id, player) {
+    this.players[id] = player
   }
 
   static roll() {
@@ -25,7 +25,7 @@ export default class Craps {
       console.log(`${sum}! Hit the point!`)
     }
     CrapsBets.roll = [dieOne, dieTwo]
-    for (const player of this.players) {
+    for (const player of Object.values(this.players)) {
       for (const [name, bet] of Object.entries(player.bets)) {
         if (bet === 0) continue
         if (this.point == null) {
@@ -43,7 +43,7 @@ export default class Craps {
         this.point = sum
         CrapsBets.point = sum
         CrapsPlayer.point = sum
-        for (const player of this.players) {
+        for (const player of Object.values(this.players)) {
           if (player.settings.autoMovePlaceBuyToComeOdds) player.movePlaceBuyToComeOdds()
         }
       }

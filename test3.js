@@ -2,7 +2,7 @@ import CrapsPlayer from "./libs/CrapsPlayer.js"
 import Craps from "./libs/Craps.js"
 
 const p = new CrapsPlayer('G', 200)
-Craps.addPlayer(p)
+Craps.addPlayer(123, p)
 
 import readline from 'node:readline'
 
