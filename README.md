@@ -6,13 +6,13 @@ Craps on Discord
 
 - Test: `npm test`
 - Test with REPL: `npm run test-repl`
+- Live: `node index.js`
 
 ## TODO
 
-1. Environment setup
-2. Discord commands
+1. Finish rest of commands
+2. Some form of persistence
 
 ### Considerations
 
-- Need to convert console logging to discord messages with proper grouping and formatting
 - Server considerations (hosting, deployment, administration, etc.)
