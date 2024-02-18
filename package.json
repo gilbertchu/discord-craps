@@ -21,5 +21,8 @@
     "url": "https://github.com/gilbertchu/discord-craps/issues"
   },
   "homepage": "https://github.com/gilbertchu/discord-craps#readme",
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "discord.js": "^14.14.1"
+  }
 }
