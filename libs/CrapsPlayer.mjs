@@ -173,6 +173,7 @@ export default class CrapsPlayer {
     } else if (!CrapsPlayer.#noMinBets.includes(name)) {
       return `Invalid bet ("${name}" does not exist).`
     }
+    if (bet === 0 && this.bets[name] === 0) return `Bet on ${fullName} is already zero (no bet).`
     if (CrapsPlayer.point == null && name === 'come') return `Cannot bet come before point established (use pass instead).`
     if ((name === 'pass' || name === 'dontPass') && CrapsPlayer.point != null) return `Cannot change ${fullName} line bet after point established.`
     if (name === 'passOdds') {
@@ -196,8 +197,7 @@ export default class CrapsPlayer {
       if (name.length <= 10) return `Cannot bet ${fullName} directly (must be established from dont come).`
       const underlying = name.slice(0, name.charAt(8) === '1' ? 10 : 9)
       if (this.bets[underlying] === 0) return `Cannot bet ${fullName} without a ${CrapsPlayer.camelToFull(underlying)} bet.`
-      const num = Number.parseInt(underlying.slice(4))
-      const oddsCap = CrapsPlayer.#checkDontOdds(bet, this.bets[underlying], num)
+      const oddsCap = CrapsPlayer.#checkDontOdds(bet, this.bets[underlying])
       if (oddsCap != null) return `Cannot bet over ${underlying}'s odds limit x${oddsCap[1]} (${oddsCap * this.bets[underlying]} max).`
     }
     if (name.startsWith('buy') || name.startsWith('lay')) {
@@ -240,20 +240,22 @@ export default class CrapsPlayer {
     } else if (finalOutcome > 0) {
       console.log(this.name, name, `won ${finalOutcome}${note}!`)
       res = [CrapsPlayer.camelToFull(name), this.bets[name], note]
-      const lowerName = name.toLowerCase()
-      if (name === 'pass') {
+      if (name === 'pass' || name === 'dontPass') {
+        // User setting: rebuy pass/don't pass on win
         this.settings.autoRebuyPassLine || this.#adjustBet(name, 0)
       } else if (typeof ['place', 'buy', 'lay', 'hard', 'big'].find(v => name.startsWith(v)) === 'undefined') {
+        // For other non multi-roll bets, clear bet after win
         this.#adjustBet(name, 0)
       }
       this.bank += finalOutcome
     } else {
       return
     }
-    if (name.startsWith('come') && name.length <= 6) {
+    // If come odds were turned off, they will return to player on the come number resolution
+    if (name.startsWith('come') && name.length <= 6 && name !== 'come') {
       const odds = `${name}Odds`
       if (this.bets[odds] > 0) this.#adjustBet(odds, 0)
-    } else if (name.startsWith('dontCome') && name.length <= 10) {
+    } else if (name.startsWith('dontCome') && name.length <= 10 && name !== 'dontCome') {
       const odds = `${name}Odds`
       if (this.bets[odds] > 0) this.#adjustBet(odds, 0)
     }
