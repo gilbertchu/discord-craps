@@ -1,11 +1,13 @@
 import { SlashCommandBuilder } from 'discord.js'
 import CrapsPlayer from "../../libs/CrapsPlayer.mjs"
 import Craps from "../../libs/Craps.mjs"
+import DiscordDB from "../../libs/DiscordDB.js"
 
 const addPlayer = function(user) {
   const { id, username } = user
   if (id in Craps.players) return false
-  const player = new CrapsPlayer(username, id, 200)
+  const bank = DiscordDB.ddb.has(id) ? DiscordDB.ddb.get(id) : 200
+  const player = new CrapsPlayer(username, id, bank)
   Craps.addPlayer(id, player)
   return player
 }
@@ -20,9 +22,9 @@ const sit = {
     // await interaction.reply(`This command was run by ${interaction.user.username}, who joined on ${interaction.member.joinedAt}.`);
     await interaction.deferReply({ephemeral: true})
     const res = addPlayer(interaction.user)
-    const reply = res ? `Joined the table! (chips: ${res.bank})` : 'Already sitting at the table!'
+    const reply = res ? `Joined the table! (chips: **$${res.bank})**` : 'Already sitting at the table!'
     await interaction.editReply(reply)
-    if (res) return `**${interaction.user.username}** joined the table!`
+    if (res) return `**${interaction.user.username}** joined the table (chips: **$${res.bank}**)!`
   },
 };
 

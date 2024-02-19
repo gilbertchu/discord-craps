@@ -40,6 +40,7 @@ export default class DiscordDB {
       console.error(err)
       this.#db = {}
     }
+    console.log('Initialized ddb with:', this.#db)
   }
 
   async #updateConfig(key, val) {
@@ -61,6 +62,7 @@ export default class DiscordDB {
   async update() {
     const content = this.#encode()
     await this.#message.edit(content)
+    console.log('Updated ddb')
   }
 
   get(id) {
