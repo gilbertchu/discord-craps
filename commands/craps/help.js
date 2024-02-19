@@ -1,16 +1,17 @@
 import { SlashCommandBuilder } from 'discord.js'
 import CrapsPlayer from "../../libs/CrapsPlayer.mjs"
 
-const commands = '> Commands available:\n> - `/sit`\n> - `/bet <name> <amount>`\n> - `/roll`\n> - `/summary`\n> - `/help <optional_category>`\n' +
+const commands = '> Commands available:\n> - `/sit`\n> - `/bet <name> <amount>`\n> - `/roll`\n> - `/summary`\n> - `/setting <name> <option>`\n> - `/help <optional_category>`\n' +
                  '> Help categories available: `commands`, `bets`, `settings`'
 const bets = '> Bets available: ' + CrapsPlayer.allBets.map(v => '`'+v+'`').join(', ')
 const aliases = '> Bet aliases: \n' + CrapsPlayer.formattedAliases
-const settings = '> Settings available:\n> `/setting autoOffOnComeout <hardways|comeOdds|placeBuy> <true|false>`\n' +
-                 '> `/setting <autoMovePlaceBuyToComeOdds|autoRebuyPassLine> <true|false>`'
+const settings = '> Settings available:\n> - `/setting <autoMovePlaceBuyToComeOdds|autoRebuyPassLine> <true|false>`\n' +
+                 '> - `/setting autoOffOnComeout <hardways|comeOdds|placeBuy|all> <true|false>`\n' +
+                 '> - `/setting` (view current settings)'
 
-const help = {commands, bets, aliases, settings}
+const categories = {commands, bets, aliases, settings}
 
-const summary = {
+const help = {
   data: new SlashCommandBuilder()
 		.setName('help')
 		.setDescription('Get a list of commands.')
@@ -28,9 +29,9 @@ const summary = {
     // interaction.member is the GuildMember object, which represents the user in the specific guild
     // await interaction.reply(`This command was run by ${interaction.user.username}, who joined on ${interaction.member.joinedAt}.`);
     const category = interaction.options.getString('category') ?? 'commands'
-    const content = help[category]
+    const content = categories[category]
     await interaction.reply({content, ephemeral: true})
   },
 };
 
-export { summary as default }
+export { help as default }

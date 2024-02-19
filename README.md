@@ -13,7 +13,7 @@ You must create `config.json` in project root (see template.config.json).
 ## TODO
 
 1. Integrate discord db into app
-   - Need to decide how updating will be handled
+   - Saving settings
 2. Timers, AFK handling
 3. App readiness
    - Disable sit until client ready + db loaded

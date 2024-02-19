@@ -330,7 +330,7 @@ export default class CrapsPlayer {
   }
 
   removeAllBets() {
-    for (const name of Object.keys(this.bets)) {
+    for (const name in this.bets) {
       if (CrapsPlayer.#lineBets.includes(name)) {
         // Cannot remove line bet once in play, bet is forfeited
         this.bets[name] = 0
