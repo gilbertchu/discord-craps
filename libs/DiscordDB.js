@@ -62,7 +62,13 @@ export default class DiscordDB {
   async update() {
     const content = this.#encode()
     await this.#message.edit(content)
-    console.log('Updated ddb')
+    console.log('Updated ddb:', this.#db)
+  }
+
+  async setPlayerToAvailableMoney(player) {
+    const {id, availableMoney} = player
+    this.#db[id] = availableMoney
+    await this.update()
   }
 
   get(id) {

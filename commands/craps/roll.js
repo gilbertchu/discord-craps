@@ -1,7 +1,8 @@
 import { SlashCommandBuilder } from 'discord.js'
 import Craps from "../../libs/Craps.mjs"
+import DiscordDB from "../../libs/DiscordDB.js"
 
-const rollDice = function(user) {
+const rollDice = async function(user) {
   const { id, username } = user
   if (!(id in Craps.players)) return [`You must be sitting at the table to roll.`, null]
   const outcomes = Craps.roll()
@@ -14,8 +15,9 @@ const rollDice = function(user) {
     const change = gain > 0 ? 'WON' : 'LOST'
     return `${fullName} ${change} $${Math.abs(gain)}${note}`
   }
-  for (const playerOutcome of Object.values(outcomes.players)) {
+  for (const [playerId, playerOutcome] of Object.entries(outcomes.players)) {
     if (!playerOutcome.betOutcomes.length) continue
+    await DiscordDB.ddb.setPlayerToAvailableMoney(Craps.players[playerId])
     lines.push(`> **${playerOutcome.name}**: ${playerOutcome.betOutcomes.map(v => `${formatBetOutcome(v)}`).join(' / ')}`)
   }
   return ['Rolling!', lines.join('\n')]
@@ -30,7 +32,7 @@ const roll = {
     // interaction.member is the GuildMember object, which represents the user in the specific guild
     // await interaction.reply(`This command was run by ${interaction.user.username}, who joined on ${interaction.member.joinedAt}.`);
     await interaction.deferReply({ephemeral: true})
-    const [res, outcome] = rollDice(interaction.user)
+    const [res, outcome] = await rollDice(interaction.user)
     await interaction.editReply(res)
     if (outcome) return outcome
   },

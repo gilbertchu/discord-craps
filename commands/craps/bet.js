@@ -1,5 +1,6 @@
 import { SlashCommandBuilder } from 'discord.js'
 import Craps from "../../libs/Craps.mjs"
+import DiscordDB from "../../libs/DiscordDB.js"
 
 const playerBet = function(user, type, amount) {
   const { id, username } = user
@@ -38,6 +39,7 @@ const bet = {
         // await interaction.followUp(`${interaction.user.username} BET ${formattedType} ${amount}`)
         msg = `**${interaction.user.username}** BET ${formattedType} $${amount}`
       }
+      await DiscordDB.ddb.setPlayerToAvailableMoney(Craps.players[interaction.user.id])
     } else {
       await interaction.editReply(res)
     }
