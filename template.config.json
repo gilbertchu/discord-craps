@@ -2,5 +2,8 @@
   "token": "BOT_TOKEN",
   "clientId": "CLIENT_ID",
   "guildId": "GUILD_ID",
-  "channelId": "CHANNEL_ID"
+  "channelId": "CHANNEL_ID",
+  "cryptoBKey": "RAW_KEY",
+  "adminId": "ADMIN_ID",
+  "messageId": "OPTIONAL_MESSAGE_ID"
 }
