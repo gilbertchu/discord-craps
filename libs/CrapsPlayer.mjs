@@ -16,14 +16,14 @@ export default class CrapsPlayer {
     'world': 'whirl',
   }
   static #minBets = ['pass', 'passOdds', 'come', 'come4odds', 'come5odds', 'come6odds', 'come8odds', 'come9odds', 'come10odds', 'field',
-                      'dontCome', 'dontCome4odds', 'dontCome5odds', 'dontCome6odds', 'dontCome8odds', 'dontCome9odds', 'dontCome10odds',
-                      'place4', 'place5', 'place6', 'place8', 'place9', 'place10',
-                      'buy4', 'buy5', 'buy6', 'buy8', 'buy9', 'buy10',
-                      'lay4', 'lay5', 'lay6', 'lay8', 'lay9', 'lay10',
-                    ]
+                     'dontCome', 'dontCome4odds', 'dontCome5odds', 'dontCome6odds', 'dontCome8odds', 'dontCome9odds', 'dontCome10odds',
+                     'place4', 'place5', 'place6', 'place8', 'place9', 'place10',
+                     'buy4', 'buy5', 'buy6', 'buy8', 'buy9', 'buy10',
+                     'lay4', 'lay5', 'lay6', 'lay8', 'lay9', 'lay10',]
   static #noMinBets = ['hard4', 'hard6', 'hard8', 'hard10', 'big6', 'big8', 'prop2', 'prop3', 'prop11', 'prop12',
-                        'hiLow', 'anyCraps', 'cAndE', 'horn', 'anySeven', 'whirl',
-                      ]
+                       'hiLow', 'anyCraps', 'cAndE', 'horn', 'anySeven', 'whirl',]
+  static #lineBets = ['pass', 'dontPass', 'come4', 'come5', 'come6', 'come8', 'come9', 'come10',
+                      'dontCome4', 'dontCome5', 'dontCome6', 'dontCome8', 'dontCome9', 'dontCome10']
   static #min = 5
   static #max = 1000
   static point = null
@@ -149,7 +149,7 @@ export default class CrapsPlayer {
   summary() {
     const msg = []
     const betArray = Object.entries(this.bets).filter(v => !v[0].includes('Odds') && v[1] > 0)
-    for (const underlying of ['pass', 'dontPass', 'come4', 'come5', 'come6', 'come8', 'come9', 'come10', 'dontCome4', 'dontCome5', 'dontCome6', 'dontCome8', 'dontCome9', 'dontCome10']) {
+    for (const underlying of CrapsPlayer.#lineBets) {
       const underlyingIndex = betArray.findIndex(v => v[0] === underlying)
       if (underlyingIndex >= 0) {
         const [underlyingBet] = betArray.splice(underlyingIndex, 1)
@@ -179,6 +179,14 @@ export default class CrapsPlayer {
 
   get money() {
     return this.bank + Object.values(this.bets).reduce((a,v) => a+v)
+  }
+
+  get availableMoney() {
+    return this.bank + Object.entries(this.bets).filter(v => !CrapsPlayer.#lineBets.includes(v[0])).reduce((a,v) => a+v[1], 0)
+  }
+
+  lineBetsValue() {
+    return this.money - this.availableMoney
   }
 
   bet(rawName, rawBet) {
@@ -311,6 +319,17 @@ export default class CrapsPlayer {
     const release = available - remaining
     this.bank += release
     if (release) console.log(`Returned extra place/buy ${CrapsPlayer.point} to available chips.`)
+  }
+
+  removeAllBets() {
+    for (const name of Object.keys(this.bets)) {
+      if (CrapsPlayer.#lineBets.includes(name)) {
+        // Cannot remove line bet once in play, bet is forfeited
+        this.bets[name] = 0
+      } else {
+        this.#adjustBet(name, 0)
+      }
+    }
   }
 
   static #checkMin(name, bet) {
