@@ -38,6 +38,7 @@ export default class CrapsPlayer {
     'autoRebuyPassLine': false,
   }
   name
+  id
   bets = {
     'pass': 0,
     'passOdds': 0,
@@ -107,8 +108,9 @@ export default class CrapsPlayer {
   }
   bank = 0
 
-  constructor(name, startingBank = 0) {
+  constructor(name, id, startingBank = 0) {
     this.name = name
+    this.id = id
     this.bank = startingBank
   }
 

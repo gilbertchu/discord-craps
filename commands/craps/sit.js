@@ -5,7 +5,7 @@ import Craps from "../../libs/Craps.mjs"
 const addPlayer = function(user) {
   const { id, username } = user
   if (id in Craps.players) return false
-  const player = new CrapsPlayer(username, 200)
+  const player = new CrapsPlayer(username, id, 200)
   Craps.addPlayer(id, player)
   return player
 }
