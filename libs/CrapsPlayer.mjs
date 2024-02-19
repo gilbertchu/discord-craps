@@ -114,6 +114,14 @@ export default class CrapsPlayer {
     this.bank = startingBank
   }
 
+  static get allBets() {
+    return this.#minBets.concat(this.#noMinBets).map(v => this.camelToFull(v))
+  }
+
+  static get formattedAliases() {
+    return Object.entries(this.#aliases).map(([k,v]) => `> \`${k}\`: \`${v}\``).join('\n')
+  }
+
   static camelToFull(name) {
     const nameCap = name.charAt(0).toUpperCase() + name.slice(1)
     let last = 0, words = [];
