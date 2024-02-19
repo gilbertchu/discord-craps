@@ -12,14 +12,9 @@ You must create `config.json` in project root (see template.config.json).
 
 ## TODO
 
-1. Finish rest of commands
-   1. `summary`
-   2. `status`
-   3. `leave` (how to handle bets?)
-   4. _TBD_
-2. Integrate discord db into app
-3. Shooter turns
-4. Timers, AFK handling
+1. Integrate discord db into app
+2. Shooter turns?
+3. Timers, AFK handling
 
 ### Considerations
 
