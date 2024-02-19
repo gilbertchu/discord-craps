@@ -12,11 +12,11 @@ const rollDice = function(user) {
   if (outcomes.sevenOut) lines.push(`Seven out.`)
   const formatBetOutcome = function([fullName, gain, note]) {
     const change = gain > 0 ? 'WON' : 'LOST'
-    return `${fullName} ${change} ${Math.abs(gain)}${note}`
+    return `${fullName} ${change} $${Math.abs(gain)}${note}`
   }
   for (const playerOutcome of Object.values(outcomes.players)) {
     if (!playerOutcome.betOutcomes.length) continue
-    lines.push(`> **${playerOutcome.name}**: ${playerOutcome.betOutcomes.reduce((a,v) => `${a} // ${formatBetOutcome(v)}`, '')}`)
+    lines.push(`> **${playerOutcome.name}**: ${playerOutcome.betOutcomes.map(v => `${formatBetOutcome(v)}`).join(' / ')}`)
   }
   return ['Rolling!', lines.join('\n')]
 }
