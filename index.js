@@ -84,3 +84,7 @@ client.once(Events.ClientReady, readyClient => {
 
 // Log in to Discord with your client's token
 client.login(token);
+
+process.on('exit', async () => await client.destroy())
+process.on('SIGINT', async () => await client.destroy())
+process.on('SIGTERM', async () => await client.destroy())

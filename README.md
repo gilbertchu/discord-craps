@@ -6,7 +6,7 @@ Craps on Discord
 
 - Test: `npm test`
 - Test with REPL: `npm run test-repl`
-- Live: `node index.js`
+- Live: `npm start`
 
 ## TODO
 
@@ -15,4 +15,4 @@ Craps on Discord
 
 ### Considerations
 
-- Server considerations (hosting, deployment, administration, etc.)
+- Using discord-db?

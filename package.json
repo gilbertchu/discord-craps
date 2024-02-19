@@ -5,7 +5,9 @@
   "main": "test.js",
   "scripts": {
     "test": "node test.js",
-    "test-repl": "bash -c 'node -i -e \"$(< test2.cjs)\"'"
+    "test-repl": "bash -c 'node -i -e \"$(< test2.cjs)\"'",
+    "start": "node index.js",
+    "deploy": "./deployment/deploy.sh"
   },
   "repository": {
     "type": "git",
