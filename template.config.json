@@ -3,7 +3,7 @@
   "clientId": "CLIENT_ID",
   "guildId": "GUILD_ID",
   "channelId": "CHANNEL_ID",
-  "cryptoBKey": "RAW_KEY",
   "adminId": "ADMIN_ID",
+  "cryptoBKey": "OPTIONAL_RAW_KEY",
   "messageId": "OPTIONAL_MESSAGE_ID"
 }
