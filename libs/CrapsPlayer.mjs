@@ -126,7 +126,7 @@ export default class CrapsPlayer {
     return words.join(' ')
   }
 
-  summary() {
+  _summary() {
     console.log(`*** ${this.name} ***`)
     const entries = Object.entries(this.bets).filter(v => !v[0].includes('Odds') && v[1] > 0)
     if (!entries.length) {
@@ -142,6 +142,34 @@ export default class CrapsPlayer {
     console.log(`[Chips]`)
     console.log(`  - Total:`, this.money)
     console.log(`  - Available:`, this.bank)
+  }
+
+  summary() {
+    const msg = []
+    const betArray = Object.entries(this.bets).filter(v => !v[0].includes('Odds') && v[1] > 0)
+    for (const underlying of ['pass', 'dontPass', 'come4', 'come5', 'come6', 'come8', 'come9', 'come10', 'dontCome4', 'dontCome5', 'dontCome6', 'dontCome8', 'dontCome9', 'dontCome10']) {
+      const underlyingIndex = betArray.findIndex(v => v[0] === underlying)
+      if (underlyingIndex >= 0) {
+        const [underlyingBet] = betArray.splice(underlyingIndex, 1)
+        const underlyingMsgs = [`${CrapsPlayer.camelToFull(underlyingBet[0])}: **${underlyingBet[1]}**`]
+        if (this.bets[`${underlying}Odds`] > 0) underlyingMsgs.push(`${CrapsPlayer.camelToFull(underlying)} Odds: **${this.bets[`${underlying}Odds`]}**`)
+        msg.push(underlyingMsgs.join(' / '))
+      }
+    }
+    for (const type of ['place', 'buy', 'lay', 'hard', 'big']) {
+      const typeBets = []
+      while (true) {
+        const typeBetIndex = betArray.findIndex(v => v[0].startsWith(type))
+        if (typeBetIndex === -1) break
+        const [typeBet] = betArray.splice(typeBetIndex, 1)
+        typeBets.push(typeBet)
+      }
+      if (typeBets.length) msg.push(typeBets.map(v => `${CrapsPlayer.camelToFull(v[0])}: **${v[1]}**`).join(' / '))
+    }
+    for (const [name, amount] of betArray) {
+      msg.push(`${CrapsPlayer.camelToFull(name)}: **${amount}**`)
+    }
+    return msg.join('\n')
   }
 
   get money() {

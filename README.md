@@ -13,8 +13,9 @@ You must create `config.json` in project root (see template.config.json).
 ## TODO
 
 1. Finish rest of commands
-2. Some form of persistence
+2. Integrate discord db into app
 
 ### Considerations
 
-- Using discord-db?
+- Denominator checking & auto bet/increment by units setting
+- Graphics?
