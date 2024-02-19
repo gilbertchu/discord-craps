@@ -164,12 +164,15 @@ export default class CrapsPlayer {
         const [typeBet] = betArray.splice(typeBetIndex, 1)
         typeBets.push(typeBet)
       }
-      if (typeBets.length) msg.push(typeBets.map(v => `${CrapsPlayer.camelToFull(v[0])}: **${v[1]}**`).join(' / '))
+      if (typeBets.length) msg.push(typeBets.map(v => `${CrapsPlayer.camelToFull(v[0])}: **$${v[1]}**`).join(' / '))
     }
     for (const [name, amount] of betArray) {
-      msg.push(`${CrapsPlayer.camelToFull(name)}: **${amount}**`)
+      msg.push(`${CrapsPlayer.camelToFull(name)}: **$${amount}**`)
     }
-    return msg.join('\n')
+    msg.unshift(msg.length ? `[BETS]` : `[BETS] _(none)_`)
+    msg.unshift(`[PLAYER] **${this.name}**`)
+    msg.push(`[CHIPS] Total: **$${this.money}** / Available: **$${this.bank}**`)
+    return msg.map(v => `> ${v}`).join('\n')
   }
 
   get money() {
