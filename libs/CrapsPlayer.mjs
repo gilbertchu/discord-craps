@@ -228,10 +228,11 @@ export default class CrapsPlayer {
       const oddsCap = CrapsPlayer.#checkDontOdds(bet, this.bets[underlying])
       if (oddsCap != null) return `Cannot bet over ${underlying}'s odds limit x${oddsCap[1]} (${oddsCap * this.bets[underlying]} max).`
     }
-    if (name.startsWith('buy') || name.startsWith('lay')) {
+    if (name.startsWith('buy') || name.startsWith('lay') && bet > 0) {
       const vig = Math.round(bet * 1 / 21)
       const actualBet = bet - vig
       console.log(this.name,`bet *${name}* ${actualBet} (vig ${vig})`)
+      return [CrapsPlayer.camelToFull(name), false, actualBet, vig]
     } else {
       console.log(this.name,`bet *${name}* ${bet}`)
     }

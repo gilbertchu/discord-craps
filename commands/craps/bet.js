@@ -24,15 +24,19 @@ const bet = {
     const res = playerBet(interaction.user, type, amount)
     let msg
     if (Array.isArray(res)) {
-      const [formattedType, cleared] = res
+      const [formattedType, cleared, ...withVig] = res
       if (cleared) {
-        await interaction.editReply(`Removed bet ${formattedType} ${cleared}.`)
+        await interaction.editReply(`Removed bet ${formattedType} $${cleared}.`)
         // await interaction.followUp(`${interaction.user.username} REMOVED BET ${formattedType} ${cleared}`)
-        msg = `**${interaction.user.username}** REMOVED BET ${formattedType} ${cleared}`
+        msg = `**${interaction.user.username}** REMOVED BET ${formattedType} $${cleared}`
+      } else if (withVig.length) {
+        const [actualBet, vig] = withVig
+        await interaction.editReply(`Placed bet ${formattedType} $${actualBet} (vig $${vig}).`)
+        msg = `**${interaction.user.username}** BET ${formattedType} $${actualBet} (vig $${vig})`
       } else {
-        await interaction.editReply(`Placed bet ${formattedType} ${amount}.`)
+        await interaction.editReply(`Placed bet $${formattedType} $${amount}.`)
         // await interaction.followUp(`${interaction.user.username} BET ${formattedType} ${amount}`)
-        msg = `**${interaction.user.username}** BET ${formattedType} ${amount}`
+        msg = `**${interaction.user.username}** BET ${formattedType} $${amount}`
       }
     } else {
       await interaction.editReply(res)
