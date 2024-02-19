@@ -2,7 +2,9 @@
 
 Craps on Discord
 
-## Test
+## Up and running
+
+You must create `config.json` in project root (see template.config.json).
 
 - Test: `npm test`
 - Test with REPL: `npm run test-repl`
