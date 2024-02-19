@@ -80,6 +80,7 @@ const rest = new REST().setToken(token);
 // It makes some properties non-nullable.
 client.once(Events.ClientReady, readyClient => {
 	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
+  // client.channels.cache.get(channelId).send('TEST');
 });
 
 // Log in to Discord with your client's token
