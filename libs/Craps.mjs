@@ -68,7 +68,7 @@ export default class Craps {
     return outcomes
   }
 
-  static status() {
+  static get status() {
     const status = this.point == null ? `COME OUT ROLL` : `POINT ESTABLISHED - **${this.point}**`
     return `< CURRENTLY ON: ${status} >`
   }

@@ -16,9 +16,8 @@ const summary = {
     // interaction.user is the object representing the User who ran the command
     // interaction.member is the GuildMember object, which represents the user in the specific guild
     // await interaction.reply(`This command was run by ${interaction.user.username}, who joined on ${interaction.member.joinedAt}.`);
-    await interaction.deferReply({ephemeral: true})
-    const res = getSummary(interaction.user)
-    await interaction.editReply(res)
+    const content = getSummary(interaction.user)
+    await interaction.reply({content, ephemeral: true})
   },
 };
 
