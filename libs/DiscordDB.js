@@ -91,6 +91,10 @@ export default class DiscordDB {
     this.#db = {}
   }
 
+  get users() {
+    return Object.keys(this.#db)
+  }
+
   get _json() {
     return JSON.stringify(this.#db)
   }

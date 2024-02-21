@@ -1,13 +1,12 @@
 {
   "name": "discord-craps",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Craps on discord",
   "main": "test.js",
   "scripts": {
     "test": "node test.js",
     "test-repl": "bash -c 'node -i -e \"$(< test2.cjs)\"'",
-    "start": "node index.js",
-    "deploy": "./deployment/deploy.sh"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",

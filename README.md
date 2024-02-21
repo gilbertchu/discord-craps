@@ -19,11 +19,10 @@ You must create `config.json` in project root (see template.config.json).
    - Disable sit until client ready + db loaded
    - Disable roll while resolving actions
    - etc.
-4. Admin commands
-   - `reset` player
 
 ### Considerations
 
 - Shooter turns
 - Denominator checking & auto bet/increment by units setting
 - Graphics?
+- Programmatic way to restrict bot to specific channel?
