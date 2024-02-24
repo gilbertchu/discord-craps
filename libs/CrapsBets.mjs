@@ -423,7 +423,7 @@ export default class CrapsBets {
   static hard6(bet) {
     if (this.#sum === 7) {
       return null
-    } else if (this.#sum === 4) {
+    } else if (this.#sum === 6) {
       if (this.roll[0] === this.roll[1]) {
         return bet * 9
       } else {
@@ -437,7 +437,7 @@ export default class CrapsBets {
   static hard8(bet) {
     if (this.#sum === 7) {
       return null
-    } else if (this.#sum === 4) {
+    } else if (this.#sum === 8) {
       if (this.roll[0] === this.roll[1]) {
         return bet * 9
       } else {
@@ -451,7 +451,7 @@ export default class CrapsBets {
   static hard10(bet) {
     if (this.#sum === 7) {
       return null
-    } else if (this.#sum === 4) {
+    } else if (this.#sum === 10) {
       if (this.roll[0] === this.roll[1]) {
         return bet * 7
       } else {

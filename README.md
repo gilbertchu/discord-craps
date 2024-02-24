@@ -22,9 +22,7 @@ You must create `config.json` in project root (see template.config.json).
 
 ## Bugs
 
-- Pass odds win amount displaying incorrectly
-- hardway bet won/loss on incorrect number
-- Bet reply has "$" sign in front of bet name
+- Pass odds win amount displaying incorrectly?
 
 ### Considerations
 

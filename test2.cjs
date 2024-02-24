@@ -8,5 +8,5 @@ Promise.all([p1, p2]).then(v => {
   p = new CrapsPlayer('G', 123, 200)
   Craps.addPlayer(123, p)
   p.summary()
-  console.log(Craps.status())
+  console.log(Craps.status)
 })

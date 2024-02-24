@@ -35,7 +35,7 @@ const bet = {
         await interaction.editReply(`Placed bet ${formattedType} $${actualBet} (vig $${vig}).`)
         msg = `**${interaction.user.username}** BET ${formattedType} $${actualBet} (vig $${vig})`
       } else {
-        await interaction.editReply(`Placed bet $${formattedType} $${amount}.`)
+        await interaction.editReply(`Placed bet ${formattedType} $${amount}.`)
         // await interaction.followUp(`${interaction.user.username} BET ${formattedType} ${amount}`)
         msg = `**${interaction.user.username}** BET ${formattedType} $${amount}`
       }
