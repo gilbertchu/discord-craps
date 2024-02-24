@@ -20,10 +20,6 @@ You must create `config.json` in project root (see template.config.json).
    - Disable roll while resolving actions
    - etc.
 
-## Bugs
-
-- Pass odds win amount displaying incorrectly?
-
 ### Considerations
 
 - Shooter turns

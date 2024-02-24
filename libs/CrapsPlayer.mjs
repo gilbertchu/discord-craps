@@ -15,8 +15,8 @@ export default class CrapsPlayer {
     'ce': 'cAndE',
     'world': 'whirl',
   }
-  static #minBets = ['pass', 'passOdds', 'come', 'come4odds', 'come5odds', 'come6odds', 'come8odds', 'come9odds', 'come10odds', 'field',
-                     'dontCome', 'dontCome4odds', 'dontCome5odds', 'dontCome6odds', 'dontCome8odds', 'dontCome9odds', 'dontCome10odds',
+  static #minBets = ['pass', 'passOdds', 'come', 'come4Odds', 'come5Odds', 'come6Odds', 'come8Odds', 'come9Odds', 'come10Odds', 'field',
+                     'dontCome', 'dontCome4Odds', 'dontCome5Odds', 'dontCome6Odds', 'dontCome8Odds', 'dontCome9Odds', 'dontCome10Odds',
                      'place4', 'place5', 'place6', 'place8', 'place9', 'place10',
                      'buy4', 'buy5', 'buy6', 'buy8', 'buy9', 'buy10',
                      'lay4', 'lay5', 'lay6', 'lay8', 'lay9', 'lay10',]
@@ -289,7 +289,7 @@ export default class CrapsPlayer {
       this.bets[name] = 0
     } else if (finalOutcome > 0) {
       console.log(this.name, name, `won ${finalOutcome}${note}!`)
-      res = [CrapsPlayer.camelToFull(name), this.bets[name], note]
+      res = [CrapsPlayer.camelToFull(name), finalOutcome, note]
       if (name === 'pass' || name === 'dontPass') {
         // User setting: rebuy pass/don't pass on win
         this.settings.autoRebuyPassLine || this.#adjustBet(name, 0)

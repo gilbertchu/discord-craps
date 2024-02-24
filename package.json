@@ -1,6 +1,6 @@
 {
   "name": "discord-craps",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Craps on discord",
   "main": "test.js",
   "scripts": {
