@@ -583,7 +583,7 @@ export default class CrapsBets {
     const actualBet = bet - vig
     if (this.#sum === 7) {
       return [true, Math.floor(actualBet * 2 / 3), vig]
-    } else if (this.#sum === 4) {
+    } else if (this.#sum === 5) {
       return [false, null, vig]
     } else {
       return 0
@@ -595,7 +595,7 @@ export default class CrapsBets {
     const actualBet = bet - vig
     if (this.#sum === 7) {
       return [true, Math.floor(actualBet * 5 / 6), vig]
-    } else if (this.#sum === 4) {
+    } else if (this.#sum === 6) {
       return [false, null, vig]
     } else {
       return 0
@@ -607,7 +607,7 @@ export default class CrapsBets {
     const actualBet = bet - vig
     if (this.#sum === 7) {
       return [true, Math.floor(actualBet * 5 / 6), vig]
-    } else if (this.#sum === 4) {
+    } else if (this.#sum === 8) {
       return [false, null, vig]
     } else {
       return 0
@@ -619,7 +619,7 @@ export default class CrapsBets {
     const actualBet = bet - vig
     if (this.#sum === 7) {
       return [true, Math.floor(actualBet * 2 / 3), vig]
-    } else if (this.#sum === 4) {
+    } else if (this.#sum === 9) {
       return [false, null, vig]
     } else {
       return 0
@@ -631,7 +631,7 @@ export default class CrapsBets {
     const actualBet = bet - vig
     if (this.#sum === 7) {
       return [true, Math.floor(actualBet * 1 / 2), vig]
-    } else if (this.#sum === 4) {
+    } else if (this.#sum === 10) {
       return [false, null, vig]
     } else {
       return 0
@@ -647,7 +647,7 @@ export default class CrapsBets {
   }
 
   static prop3(bet) {
-    if (this.#sum === 2) {
+    if (this.#sum === 3) {
       return bet * 15
     } else {
       return null
@@ -655,7 +655,7 @@ export default class CrapsBets {
   }
 
   static prop11(bet) {
-    if (this.#sum === 2) {
+    if (this.#sum === 11) {
       return bet * 15
     } else {
       return null
@@ -663,7 +663,7 @@ export default class CrapsBets {
   }
 
   static prop12(bet) {
-    if (this.#sum === 2) {
+    if (this.#sum === 12) {
       return bet * 30
     } else {
       return null
