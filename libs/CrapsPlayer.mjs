@@ -273,9 +273,9 @@ export default class CrapsPlayer {
           break
         case 'boolean':
           if (outcome[0]) {
-            note = ` (paid vig ${outcome[2]})`
+            note = ` (paid vig $${outcome[2]})`
           } else {
-            note = ` (returned vig ${outcome[2]})`
+            note = ` (returned vig $${outcome[2]})`
             this.bank += outcome[2]
           }
           finalOutcome = outcome[1]
@@ -285,8 +285,10 @@ export default class CrapsPlayer {
       finalOutcome = outcome
     }
     if (finalOutcome == null) {
-      console.log(this.name, name, `lost ${this.bets[name]}${note}.`)
-      res = [CrapsPlayer.camelToFull(name), -1 * this.bets[name], note]
+      const actualBet = name.startsWith('buy') || name.startsWith('lay') ?
+        this.bets[name] - Math.max(Math.round(this.bets[name] * 1 / 21), 1) : this.bets[name]
+      console.log(this.name, name, `lost ${actualBet}${note}.`)
+      res = [CrapsPlayer.camelToFull(name), -1 * actualBet, note]
       this.bets[name] = 0
     } else if (finalOutcome > 0) {
       console.log(this.name, name, `won ${finalOutcome}${note}!`)
