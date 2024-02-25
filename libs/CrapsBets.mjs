@@ -495,7 +495,7 @@ export default class CrapsBets {
   }
 
   static buy4(bet) {
-    const vig = Math.round(bet * 1 / 21)
+    const vig = Math.max(Math.round(bet * 1 / 21), 1)
     const actualBet = bet - vig
     if (this.#sum === 7) {
       return [false, null, vig]
@@ -507,7 +507,7 @@ export default class CrapsBets {
   }
 
   static buy5(bet) {
-    const vig = Math.round(bet * 1 / 21)
+    const vig = Math.max(Math.round(bet * 1 / 21), 1)
     const actualBet = bet - vig
     if (this.#sum === 7) {
       return [false, null, vig]
@@ -519,7 +519,7 @@ export default class CrapsBets {
   }
 
   static buy6(bet) {
-    const vig = Math.round(bet * 1 / 21)
+    const vig = Math.max(Math.round(bet * 1 / 21), 1)
     const actualBet = bet - vig
     if (this.#sum === 7) {
       return [false, null, vig]
@@ -531,7 +531,7 @@ export default class CrapsBets {
   }
 
   static buy8(bet) {
-    const vig = Math.round(bet * 1 / 21)
+    const vig = Math.max(Math.round(bet * 1 / 21), 1)
     const actualBet = bet - vig
     if (this.#sum === 7) {
       return [false, null, vig]
@@ -543,7 +543,7 @@ export default class CrapsBets {
   }
 
   static buy9(bet) {
-    const vig = Math.round(bet * 1 / 21)
+    const vig = Math.max(Math.round(bet * 1 / 21), 1)
     const actualBet = bet - vig
     if (this.#sum === 7) {
       return [false, null, vig]
@@ -555,7 +555,7 @@ export default class CrapsBets {
   }
 
   static buy10(bet) {
-    const vig = Math.round(bet * 1 / 21)
+    const vig = Math.max(Math.round(bet * 1 / 21), 1)
     const actualBet = bet - vig
     if (this.#sum === 7) {
       return [false, null, vig]
@@ -567,7 +567,7 @@ export default class CrapsBets {
   }
 
   static lay4(bet) {
-    const vig = Math.round(bet * 1 / 21)
+    const vig = Math.max(Math.round(bet * 1 / 21), 1)
     const actualBet = bet - vig
     if (this.#sum === 7) {
       return [true, Math.floor(actualBet * 1 / 2), vig]
@@ -579,7 +579,7 @@ export default class CrapsBets {
   }
 
   static lay5(bet) {
-    const vig = Math.round(bet * 1 / 21)
+    const vig = Math.max(Math.round(bet * 1 / 21), 1)
     const actualBet = bet - vig
     if (this.#sum === 7) {
       return [true, Math.floor(actualBet * 2 / 3), vig]
@@ -591,7 +591,7 @@ export default class CrapsBets {
   }
 
   static lay6(bet) {
-    const vig = Math.round(bet * 1 / 21)
+    const vig = Math.max(Math.round(bet * 1 / 21), 1)
     const actualBet = bet - vig
     if (this.#sum === 7) {
       return [true, Math.floor(actualBet * 5 / 6), vig]
@@ -603,7 +603,7 @@ export default class CrapsBets {
   }
 
   static lay8(bet) {
-    const vig = Math.round(bet * 1 / 21)
+    const vig = Math.max(Math.round(bet * 1 / 21), 1)
     const actualBet = bet - vig
     if (this.#sum === 7) {
       return [true, Math.floor(actualBet * 5 / 6), vig]
@@ -615,7 +615,7 @@ export default class CrapsBets {
   }
 
   static lay9(bet) {
-    const vig = Math.round(bet * 1 / 21)
+    const vig = Math.max(Math.round(bet * 1 / 21), 1)
     const actualBet = bet - vig
     if (this.#sum === 7) {
       return [true, Math.floor(actualBet * 2 / 3), vig]
@@ -627,7 +627,7 @@ export default class CrapsBets {
   }
 
   static lay10(bet) {
-    const vig = Math.round(bet * 1 / 21)
+    const vig = Math.max(Math.round(bet * 1 / 21), 1)
     const actualBet = bet - vig
     if (this.#sum === 7) {
       return [true, Math.floor(actualBet * 1 / 2), vig]
