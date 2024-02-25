@@ -27,7 +27,7 @@ export default class Craps {
       outcomes.sevenOut = true
       console.log(`Seven out.`)
     } else if (sum === this.point) {
-      outcomes.hit = true
+      outcomes.hitPoint = true
       console.log(`${sum}! Hit the point!`)
     }
     CrapsBets.roll = [dieOne, dieTwo]

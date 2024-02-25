@@ -511,7 +511,7 @@ export default class CrapsBets {
     const actualBet = bet - vig
     if (this.#sum === 7) {
       return [false, null, vig]
-    } else if (this.#sum === 4) {
+    } else if (this.#sum === 5) {
       return [true, Math.floor(actualBet * 3 / 2), vig]
     } else {
       return 0
@@ -523,7 +523,7 @@ export default class CrapsBets {
     const actualBet = bet - vig
     if (this.#sum === 7) {
       return [false, null, vig]
-    } else if (this.#sum === 4) {
+    } else if (this.#sum === 6) {
       return [true, Math.floor(actualBet * 6 / 5), vig]
     } else {
       return 0
@@ -535,7 +535,7 @@ export default class CrapsBets {
     const actualBet = bet - vig
     if (this.#sum === 7) {
       return [false, null, vig]
-    } else if (this.#sum === 4) {
+    } else if (this.#sum === 8) {
       return [true, Math.floor(actualBet * 6 / 5), vig]
     } else {
       return 0
@@ -547,7 +547,7 @@ export default class CrapsBets {
     const actualBet = bet - vig
     if (this.#sum === 7) {
       return [false, null, vig]
-    } else if (this.#sum === 4) {
+    } else if (this.#sum === 9) {
       return [true, Math.floor(actualBet * 3 / 2), vig]
     } else {
       return 0
@@ -559,7 +559,7 @@ export default class CrapsBets {
     const actualBet = bet - vig
     if (this.#sum === 7) {
       return [false, null, vig]
-    } else if (this.#sum === 4) {
+    } else if (this.#sum === 10) {
       return [true, actualBet * 2, vig]
     } else {
       return 0
