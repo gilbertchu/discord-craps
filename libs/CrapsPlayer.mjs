@@ -15,7 +15,8 @@ export default class CrapsPlayer {
     'ce': 'cAndE',
     'world': 'whirl',
   }
-  static #minBets = ['pass', 'passOdds', 'come', 'come4Odds', 'come5Odds', 'come6Odds', 'come8Odds', 'come9Odds', 'come10Odds', 'field',
+  static #minBets = ['pass', 'passOdds', 'dontPass', 'dontPassOdds','field',
+                     'come', 'come4Odds', 'come5Odds', 'come6Odds', 'come8Odds', 'come9Odds', 'come10Odds',
                      'dontCome', 'dontCome4Odds', 'dontCome5Odds', 'dontCome6Odds', 'dontCome8Odds', 'dontCome9Odds', 'dontCome10Odds',
                      'place4', 'place5', 'place6', 'place8', 'place9', 'place10',
                      'buy4', 'buy5', 'buy6', 'buy8', 'buy9', 'buy10',
