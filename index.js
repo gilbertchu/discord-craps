@@ -46,7 +46,13 @@ client.on(Events.InteractionCreate, async interaction => {
 
 	try {
 		const res = await command.execute(interaction);
-		if (res) client.channels.cache.get(channelId).send(res)
+		if (typeof res === 'string') {
+			client.channels.cache.get(channelId).send(res)
+		} else if (typeof res === 'object') {
+			const { message, callback = () => console.warn('Empty callback!') } = res
+			if (message) client.channels.cache.get(channelId).send(message)
+			callback()
+		}
 	} catch (error) {
 		console.error(error);
 		if (interaction.replied || interaction.deferred) {

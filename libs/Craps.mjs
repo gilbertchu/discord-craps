@@ -6,6 +6,11 @@ export default class Craps {
   static players = {}
   static rolling = false
 
+  static set isRolling(status) {
+    this.rolling = status
+    console.log(`Rolling ${status ? 'started' : 'finished'}`)
+  }
+
   static addPlayer(id, player) {
     this.players[id] = player
   }
