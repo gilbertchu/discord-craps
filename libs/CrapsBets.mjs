@@ -155,7 +155,7 @@ export default class CrapsBets {
   }
 
   static come5Odds(bet) {
-    if (this.#sum === 4) {
+    if (this.#sum === 5) {
       return Math.floor(bet * 3 / 2)
     } else if (this.#sum === 7) {
       return null
@@ -165,7 +165,7 @@ export default class CrapsBets {
   }
 
   static come6Odds(bet) {
-    if (this.#sum === 4) {
+    if (this.#sum === 6) {
       return Math.floor(bet * 6 / 5)
     } else if (this.#sum === 7) {
       return null
@@ -175,7 +175,7 @@ export default class CrapsBets {
   }
 
   static come8Odds(bet) {
-    if (this.#sum === 4) {
+    if (this.#sum === 8) {
       return Math.floor(bet * 6 / 5)
     } else if (this.#sum === 7) {
       return null
@@ -185,7 +185,7 @@ export default class CrapsBets {
   }
 
   static come9Odds(bet) {
-    if (this.#sum === 4) {
+    if (this.#sum === 9) {
       return Math.floor(bet * 3 / 2)
     } else if (this.#sum === 7) {
       return null
@@ -195,7 +195,7 @@ export default class CrapsBets {
   }
 
   static come10Odds(bet) {
-    if (this.#sum === 4) {
+    if (this.#sum === 10) {
       return bet * 2
     } else if (this.#sum === 7) {
       return null
@@ -286,7 +286,7 @@ export default class CrapsBets {
   }
 
   static dontCome5Odds(bet) {
-    if (this.#sum === 4) {
+    if (this.#sum === 5) {
       return null
     } else if (this.#sum === 7) {
       return Math.floor(bet * 2 / 3)
@@ -296,7 +296,7 @@ export default class CrapsBets {
   }
 
   static dontCome6Odds(bet) {
-    if (this.#sum === 4) {
+    if (this.#sum === 6) {
       return null
     } else if (this.#sum === 7) {
       return Math.floor(bet * 5 / 6)
@@ -306,7 +306,7 @@ export default class CrapsBets {
   }
 
   static dontCome8Odds(bet) {
-    if (this.#sum === 4) {
+    if (this.#sum === 8) {
       return null
     } else if (this.#sum === 7) {
       return Math.floor(bet * 5 / 6)
@@ -316,7 +316,7 @@ export default class CrapsBets {
   }
 
   static dontCome9Odds(bet) {
-    if (this.#sum === 4) {
+    if (this.#sum === 9) {
       return null
     } else if (this.#sum === 7) {
       return Math.floor(bet * 2 / 3)
@@ -326,7 +326,7 @@ export default class CrapsBets {
   }
 
   static dontCome10Odds(bet) {
-    if (this.#sum === 4) {
+    if (this.#sum === 10) {
       return null
     } else if (this.#sum === 7) {
       return Math.floor(bet * 1 / 2)
