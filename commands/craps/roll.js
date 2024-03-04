@@ -11,6 +11,7 @@ const rollDice = async function(user) {
   if (outcomes.hitPoint) lines.push(`**Hit the point!**`)
   if (outcomes.sevenOut) lines.push(`Seven out.`)
   const formatBetOutcome = function([fullName, gain, note]) {
+    if (gain === 0) return `_${fullName} moved to ${note}_`
     const change = gain > 0 ? 'WON' : 'LOST'
     return `${fullName} ${change} $${Math.abs(gain)}${note}`
   }

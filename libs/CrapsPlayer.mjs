@@ -271,8 +271,8 @@ export default class CrapsPlayer {
       switch (typeof outcome[0]) {
         case 'string':
           this.bets[outcome[0]] = outcome[1]
-          finalOutcome = 0
-          break
+          this.bets[name] = 0
+          return [CrapsPlayer.camelToFull(name), 0, outcome[0]]
         case 'boolean':
           if (outcome[0]) {
             note = ` (paid vig $${outcome[2]})`
