@@ -396,7 +396,7 @@ export default class CrapsBets {
     }
   }
 
-  static place4(bet) {
+  static place10(bet) {
     if (this.#sum === 10) {
       return Math.floor(bet * 9 / 5)
     } else if (this.#sum === 7) {
