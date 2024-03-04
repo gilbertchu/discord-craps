@@ -20,7 +20,7 @@ const rollDice = async function(user) {
     await DiscordDB.ddb.setPlayerToAvailableMoney(Craps.players[playerId])
     lines.push(`> **${playerOutcome.name}**: ${playerOutcome.betOutcomes.map(v => `${formatBetOutcome(v)}`).join(' / ')}`)
   }
-  return ['Rolling!', lines.join('\n')]
+  return ['**Rolling!**', lines.join('\n')]
 }
 
 const roll = {
@@ -32,9 +32,15 @@ const roll = {
     // interaction.member is the GuildMember object, which represents the user in the specific guild
     // await interaction.reply(`This command was run by ${interaction.user.username}, who joined on ${interaction.member.joinedAt}.`);
     await interaction.deferReply({ephemeral: true})
-    const [res, outcome] = await rollDice(interaction.user)
-    await interaction.editReply(res)
-    if (outcome) return outcome
+    if (Craps.rolling) {
+      await interaction.editReply("_Someone is already rolling._")
+    } else {
+      Craps.rolling = true
+      const [res, outcome] = await rollDice(interaction.user)
+      await interaction.editReply(res)
+      Craps.rolling = false
+      if (outcome) return outcome
+    }
   },
 };
 

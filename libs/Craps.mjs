@@ -4,6 +4,7 @@ import CrapsBets from "./CrapsBets.mjs"
 export default class Craps {
   static point = null
   static players = {}
+  static rolling = false
 
   static addPlayer(id, player) {
     this.players[id] = player
