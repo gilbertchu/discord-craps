@@ -17,7 +17,7 @@ export default class Craps {
     const sum = dieOne + dieTwo
     outcomes.roll = [dieOne, dieTwo]
     outcomes.sum = sum
-    const status = this.point == null ? `COME OUT` : `POINT ${this.point}`
+    const status = this.point === null ? `COME OUT` : `POINT ${this.point}`
     console.log(`[${status}] ROLL *[${dieOne}] [${dieTwo}]* (${sum})`)
     if (!this.point) {
       if ([4,5,6,8,9,10].includes(sum)) {
@@ -37,7 +37,7 @@ export default class Craps {
       const results = []
       for (const [name, bet] of Object.entries(player.bets)) {
         if (bet === 0) continue
-        if (this.point == null) {
+        if (this.point === null) {
           if (player.autoOffOnComeOut['comeOdds'] && name.startsWith('come') && name.length > 6) continue
           if (player.autoOffOnComeOut['comeOdds'] && name.startsWith('dontCome') && name.length > 10) continue
           if (player.autoOffOnComeOut['hardways'] && name.startsWith('hard')) continue
@@ -70,7 +70,7 @@ export default class Craps {
   }
 
   static get status() {
-    const status = this.point == null ? `COME OUT ROLL` : `POINT ESTABLISHED - **${this.point}**`
+    const status = this.point === null ? `COME OUT ROLL` : `POINT ESTABLISHED - **${this.point}**`
     return `< CURRENTLY ON: ${status} >`
   }
 

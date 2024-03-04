@@ -224,15 +224,15 @@ export default class CrapsPlayer {
       return `Invalid bet ("${name}" does not exist).`
     }
     if (bet === 0 && this.bets[name] === 0) return `Bet on ${fullName} is already zero (no bet).`
-    if (CrapsPlayer.point == null && name === 'come') return `Cannot bet come before point established (use pass instead).`
+    if (CrapsPlayer.point === null && name === 'come') return `Cannot bet come before point established (use pass instead).`
     if ((name === 'pass' || name === 'dontPass') && CrapsPlayer.point != null) return `Cannot change ${fullName} line bet after point established.`
     if (name === 'passOdds') {
-      if (CrapsPlayer.point == null) return `Cannot bet ${fullName} before point established.`
+      if (CrapsPlayer.point === null) return `Cannot bet ${fullName} before point established.`
       if (this.bets['pass'] === 0) return `Cannot bet ${fullName} without pass line bet.`
       const oddsCap = CrapsPlayer.#checkOdds(bet, this.bets['pass'], CrapsPlayer.point)
       if (oddsCap != null) return `Cannot bet over pass's odds limit x${oddsCap} ($${oddsCap * this.bets['pass']} max)`
     } else if (name === 'dontPassOdds') {
-      if (CrapsPlayer.point == null) return `Cannot bet ${fullName} before point established.`
+      if (CrapsPlayer.point === null) return `Cannot bet ${fullName} before point established.`
       if (this.bets['dontPass'] === 0) return `Cannot bet ${fullName} without dont pass line bet.`
       const oddsCap = CrapsPlayer.#checkDontOdds(bet, this.bets['dontPass'], CrapsPlayer.point)
       if (oddsCap != null) return `Cannot bet over dontPass's odds limit x${oddsCap} ($${oddsCap * this.bets['dontPass']} max).`
@@ -271,6 +271,7 @@ export default class CrapsPlayer {
       switch (typeof outcome[0]) {
         case 'string':
           this.bets[outcome[0]] = outcome[1]
+          finalOutcome = 0
           break
         case 'boolean':
           if (outcome[0]) {
@@ -285,7 +286,7 @@ export default class CrapsPlayer {
     } else {
       finalOutcome = outcome
     }
-    if (finalOutcome == null) {
+    if (finalOutcome === null) {
       const actualBet = name.startsWith('buy') || name.startsWith('lay') ?
         this.bets[name] - Math.max(Math.round(this.bets[name] * 1 / 21), 1) : this.bets[name]
       console.log(this.name, name, `lost ${actualBet}${note}.`)
