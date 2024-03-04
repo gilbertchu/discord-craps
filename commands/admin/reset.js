@@ -1,6 +1,7 @@
 import { SlashCommandBuilder } from 'discord.js'
 import DiscordDB from "../../libs/DiscordDB.js"
 import configJson from '../../config.json' assert {type: 'json'}
+import Craps from '../../libs/Craps.mjs';
 const { adminId } = configJson
 
 const reset = {
@@ -28,11 +29,12 @@ const reset = {
         const amount = Number.parseInt(interaction.options.getString('amount'))
         DiscordDB.ddb.set(userId, amount)
         await DiscordDB.ddb.update()
-        content = `Reset user ${userId} to ${amount}.`
+        if (userId in Craps.players) Craps.players[userId].bank = amount
+        content = `Reset user ${userId} bank to ${amount}.`
         // TODO - do we want to check if they are sitting at the table and also reset their CrapsPlayer bank?
         // TODO - should we announce the change to the whole channel?
       } else {
-        content = `Cannot find user ${userId} in db.`
+        content = `_Cannot find user ${userId} in db._`
       }
     }
     await interaction.reply({content, ephemeral: true})
