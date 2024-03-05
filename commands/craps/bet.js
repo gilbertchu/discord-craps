@@ -4,7 +4,7 @@ import DiscordDB from "../../libs/DiscordDB.js"
 
 const playerBet = function(user, type, amount) {
   const { id, username } = user
-  if (!(id in Craps.players)) return `You are not sitting at the table!`
+  if (!(id in Craps.players)) return `You have not joined the table!`
   const player = Craps.players[id]
   return player.bet(type, amount)
 }

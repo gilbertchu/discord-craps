@@ -41,7 +41,7 @@ const setting = {
     const player = Craps.players[interaction.user.id]
     let content
     if (typeof player === 'undefined') {
-      content = `Must be sitting to view/change settings.`
+      content = `Must have joined to view/change settings.`
     } else if (!mainSetting) {
       content = `Current settings:\n\`\`\`\nautoOffOnComeOut: ${JSON.stringify(player.autoOffOnComeOut, null, 2)}\nOther: ${JSON.stringify(player.settings, null, 2)}\n\`\`\``
     } else if (mainSetting === 'autoOffOnComeOut') {

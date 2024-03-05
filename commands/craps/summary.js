@@ -3,7 +3,7 @@ import Craps from "../../libs/Craps.mjs"
 
 const getSummary = function(user) {
   const { id, username } = user
-  if (!(id in Craps.players)) return `You are not sitting at the table.`
+  if (!(id in Craps.players)) return `You have not joined the table.`
   const player = Craps.players[id]
   return player.summary()
 }
