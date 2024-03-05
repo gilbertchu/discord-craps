@@ -20,9 +20,7 @@ export default class CrapsPlayer {
                      'dontCome', 'dontCome4Odds', 'dontCome5Odds', 'dontCome6Odds', 'dontCome8Odds', 'dontCome9Odds', 'dontCome10Odds',
                      'place4', 'place5', 'place6', 'place8', 'place9', 'place10',
                      'buy4', 'buy5', 'buy6', 'buy8', 'buy9', 'buy10',
-                     'lay4', 'lay5', 'lay6', 'lay8', 'lay9', 'lay10',]
-  static #noMinBets = ['hard4', 'hard6', 'hard8', 'hard10', 'big6', 'big8', 'prop2', 'prop3', 'prop11', 'prop12',
-                       'hiLow', 'anyCraps', 'cAndE', 'horn', 'anySeven', 'whirl',]
+                     'lay4', 'lay5', 'lay6', 'lay8', 'lay9', 'lay10']
   static #comeBets = ['come4', 'come5', 'come6', 'come8', 'come9', 'come10',
                       'dontCome4', 'dontCome5', 'dontCome6', 'dontCome8', 'dontCome9', 'dontCome10']
   static #lineBets = ['pass', 'dontPass']
