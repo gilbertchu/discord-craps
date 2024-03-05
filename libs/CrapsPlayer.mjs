@@ -23,8 +23,9 @@ export default class CrapsPlayer {
                      'lay4', 'lay5', 'lay6', 'lay8', 'lay9', 'lay10',]
   static #noMinBets = ['hard4', 'hard6', 'hard8', 'hard10', 'big6', 'big8', 'prop2', 'prop3', 'prop11', 'prop12',
                        'hiLow', 'anyCraps', 'cAndE', 'horn', 'anySeven', 'whirl',]
-  static #lineBets = ['pass', 'dontPass', 'come4', 'come5', 'come6', 'come8', 'come9', 'come10',
+  static #comeBets = ['come4', 'come5', 'come6', 'come8', 'come9', 'come10',
                       'dontCome4', 'dontCome5', 'dontCome6', 'dontCome8', 'dontCome9', 'dontCome10']
+  static #lineBets = ['pass', 'dontPass']
   static #min = 5
   static #max = 1000
   static point = null
@@ -336,8 +337,9 @@ export default class CrapsPlayer {
 
   removeAllBets() {
     for (const name in this.bets) {
-      if (CrapsPlayer.#lineBets.includes(name)) {
-        // Cannot remove line bet once in play, bet is forfeited
+      if (CrapsPlayer.#comeBets.includes(name) ||
+        (CrapsPlayer.#lineBets.includes(name) && CrapsPlayer.point !== null)) {
+        // Cannot remove line bet once number is established, bet is forfeited
         this.bets[name] = 0
       } else {
         this.#adjustBet(name, 0)
