@@ -225,30 +225,30 @@ export default class CrapsPlayer {
     }
     if (bet === 0 && this.bets[name] === 0) return `Bet on ${fullName} is already zero (no bet).`
     if (CrapsPlayer.point === null && name === 'come') return `Cannot bet come before point established (use pass instead).`
-    if ((name === 'pass' || name === 'dontPass') && CrapsPlayer.point != null) return `Cannot change ${fullName} line bet after point established.`
+    if ((name === 'pass' || name === 'dontPass') && CrapsPlayer.point !== null) return `Cannot change ${fullName} line bet after point established.`
     if (name === 'passOdds') {
       if (CrapsPlayer.point === null) return `Cannot bet ${fullName} before point established.`
       if (this.bets['pass'] === 0) return `Cannot bet ${fullName} without pass line bet.`
       const oddsCap = CrapsPlayer.#checkOdds(bet, this.bets['pass'], CrapsPlayer.point)
-      if (oddsCap != null) return `Cannot bet over pass's odds limit x${oddsCap} ($${oddsCap * this.bets['pass']} max)`
+      if (oddsCap !== null) return `Cannot bet over pass's odds limit x${oddsCap} ($${oddsCap * this.bets['pass']} max)`
     } else if (name === 'dontPassOdds') {
       if (CrapsPlayer.point === null) return `Cannot bet ${fullName} before point established.`
       if (this.bets['dontPass'] === 0) return `Cannot bet ${fullName} without dont pass line bet.`
       const oddsCap = CrapsPlayer.#checkDontOdds(bet, this.bets['dontPass'], CrapsPlayer.point)
-      if (oddsCap != null) return `Cannot bet over dontPass's odds limit x${oddsCap} ($${oddsCap * this.bets['dontPass']} max).`
+      if (oddsCap !== null) return `Cannot bet over dontPass's odds limit x${oddsCap} ($${oddsCap * this.bets['dontPass']} max).`
     } else if (name !== 'come' && name.startsWith('come')) {
       if (name.length <= 6) return `Cannot bet ${fullName} directly (must be established from come).`
       const underlying = name.slice(0, name.charAt(4) === '1' ? 6 : 5)
       if (this.bets[underlying] === 0) return `Cannot bet ${fullName} without a ${CrapsPlayer.camelToFull(underlying)} bet.`
       const num = Number.parseInt(underlying.slice(4))
       const oddsCap = CrapsPlayer.#checkOdds(bet, this.bets[underlying], num)
-      if (oddsCap != null) return `Cannot bet over ${underlying}'s odds limit x${oddsCap[1]} ($${oddsCap * this.bets[underlying]} max).`
+      if (oddsCap !== null) return `Cannot bet over ${underlying}'s odds limit x${oddsCap[1]} ($${oddsCap * this.bets[underlying]} max).`
     } else if (name !== 'dontCome' && name.startsWith('dontCome')) {
       if (name.length <= 10) return `Cannot bet ${fullName} directly (must be established from dont come).`
       const underlying = name.slice(0, name.charAt(8) === '1' ? 10 : 9)
       if (this.bets[underlying] === 0) return `Cannot bet ${fullName} without a ${CrapsPlayer.camelToFull(underlying)} bet.`
       const oddsCap = CrapsPlayer.#checkDontOdds(bet, this.bets[underlying])
-      if (oddsCap != null) return `Cannot bet over ${underlying}'s odds limit x${oddsCap[1]} ($${oddsCap * this.bets[underlying]} max).`
+      if (oddsCap !== null) return `Cannot bet over ${underlying}'s odds limit x${oddsCap[1]} ($${oddsCap * this.bets[underlying]} max).`
     }
     if ((name.startsWith('buy') || name.startsWith('lay')) && bet > 0) {
       const vig = Math.round(bet * 1 / 21)
