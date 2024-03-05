@@ -89,7 +89,7 @@ const rest = new REST().setToken(token);
 client.once(Events.ClientReady, async (readyClient) => {
 	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
 	await ddb.init()
-	client.channels.cache.get(channelId).send("CRAPS INITIALIZED, STARTING NEW GAME")
+	client.channels.cache.get(channelId).send("...CRAPS REINITIALIZED, STARTING NEW GAME...")
 });
 
 // Log in to Discord with your client's token

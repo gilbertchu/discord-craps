@@ -6,7 +6,7 @@ const commands = '> Commands available:\n> - `/join`\n> - `/leave`\n> - `/bet <n
                  '> Help categories available: `commands`, `bets`, `aliases`, `settings`'
 const bets = '> Bets available: ' + CrapsPlayer.allBets.map(v => '`'+v+'`').join(', ')
 const aliases = '> Bet aliases: \n' + CrapsPlayer.formattedAliases
-const settings = '> Settings available:\n> - `/setting <autoMovePlaceBuyToComeOdds|autoRebuyPassLine> <true|false>`\n' +
+const settings = '> Settings available:\n> - `/setting <autoMovePlaceBuyToComeOdds|autoIncrementByUnits|autoRebuyPassLine> <true|false>`\n' +
                  '> - `/setting autoOffOnComeout <hardways|comeOdds|placeBuy|all> <true|false>`\n' +
                  '> - `/setting` (view current settings)'
 

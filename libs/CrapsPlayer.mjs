@@ -36,8 +36,8 @@ export default class CrapsPlayer {
   }
   settings = {
     'autoMovePlaceBuyToComeOdds': true,
-    // 'autoIncrementByUnits': true,
-    'autoRebuyPassLine': false,
+    'autoIncrementByUnits': true,
+    'autoRebuyPassLine': true,
   }
   name
   id
@@ -107,6 +107,11 @@ export default class CrapsPlayer {
     'dontCome9': 0,
     'dontCome10': 0,
     'dontCome': 0,
+  }
+  static #units = {
+    'passOdds': [5, 2, 1],
+    'dontPassOdds': [6, 3, 2],
+    'place': [6, 5, 5]
   }
   bank = 0
 
@@ -200,11 +205,50 @@ export default class CrapsPlayer {
   }
 
   bet(rawName, rawBet) {
-    const bet = typeof rawBet === 'number' ? rawBet : Number.parseInt(rawBet.trim())
-    if (Number.isNaN(bet) || bet < 0 || !Number.isInteger(bet)) return `Invalid bet ("${rawBet}" not a valid amount)`
-    if (bet > CrapsPlayer.#max) return `Cannot bet more than absolute max (${CrapsPlayer.#max}).`
-    if (bet > this.bank) return `Not enough money! (${this.bank} of ${bet})`
+    const initalBet = typeof rawBet === 'number' ? rawBet : Number.parseInt(rawBet.trim())
+    if (Number.isNaN(initalBet) || initalBet < 0 || !Number.isInteger(initalBet)) return `Invalid bet ("${rawBet}" not a valid amount)`
+    let bet = initalBet, raised = false;
     let name = rawName.trim()
+    const formattedName = name.replaceAll(' ', '').toLowerCase()
+    name = Object.keys(this.bets).find(v => v.toLowerCase() === formattedName)
+    if (this.settings.autoIncrementByUnits) {
+      let relevantNum, unitIndex, settingName;
+      if (name === 'passOdds' || name === 'dontPassOdds') {
+        relevantNum = CrapsPlayer.point
+        settingName = name
+      } else if (name.startsWith('place')) {
+        relevantNum = Number.parseInt(name.slice(name.charAt(5) === '1' ? -2 : -1))
+        settingName = 'place'
+      } else if ((name.startsWith('come') || name.startsWith('dont')) && name.endsWith('Odds')) {
+        relevantNum = Number.parseInt(name.slice(name.slice(-5, -4) === '0' ? -6 : -5, -4))
+        settingName = name.startsWith('come') ? 'passOdds' : 'dontPassOdds'
+      }
+      if (typeof settingName === 'string') {
+        switch (relevantNum) {
+          case 6:
+          case 8:
+            unitIndex = 0
+            break
+          case 5:
+          case 9:
+            unitIndex = 1
+            break
+          case 4:
+          case 10:
+            unitIndex = 2
+            break
+        }
+        const remainder = bet % CrapsPlayer.#units[settingName][unitIndex]
+        if (remainder > 0) {
+          const raise = CrapsPlayer.#units[settingName][unitIndex] - remainder
+          bet = bet + raise
+          raised = true
+        }
+      }
+    }
+    const note = raised ? ' _(auto topped up amount)_' : ''
+    if (bet > CrapsPlayer.#max) return `Cannot bet more than absolute max of ${CrapsPlayer.#max} - your bet is ${bet}${note}.`
+    if (bet > this.bank) return `Not enough money - only have ${this.bank} of ${bet}${note}!`
     if (Object.keys(CrapsPlayer.#aliases).includes(name)) {
       if (Array.isArray(CrapsPlayer.#aliases[name])) {
         const remainder = bet % CrapsPlayer.#aliases[name].length
@@ -216,8 +260,6 @@ export default class CrapsPlayer {
         return this.bet(CrapsPlayer.#aliases[name], bet)
       }
     }
-    const formattedName = name.replaceAll(' ', '').toLowerCase()
-    name = Object.keys(this.bets).find(v => v.toLowerCase() === formattedName)
     const fullName = CrapsPlayer.camelToFull(name)
     if (CrapsPlayer.#minBets.includes(name)) {
       if (CrapsPlayer.#checkMin(name, bet)) return `This bet requires minimum $${CrapsPlayer.#min}${name.startsWith('buy') || name.startsWith('lay') ? ' (+ vig 5%)' : ''}.`
@@ -256,14 +298,14 @@ export default class CrapsPlayer {
       const actualBet = bet - vig
       console.log(this.name,`bet *${name}* ${actualBet} (vig ${vig})`)
       this.#adjustBet(name, bet)
-      return [CrapsPlayer.camelToFull(name), false, actualBet, vig]
+      return [CrapsPlayer.camelToFull(name), false, raised, actualBet, vig]
     } else {
-      console.log(this.name,`bet *${name}* ${bet}`)
+      console.log(this.name,`BET *${name}* $${bet}${raised ? ' (auto topped up)' : ''}`)
     }
     const old = this.bets[name]
     this.#adjustBet(name, bet)
     const cleared = bet === 0 && old
-    return [CrapsPlayer.camelToFull(name), cleared]
+    return [CrapsPlayer.camelToFull(name), cleared, raised, bet]
   }
 
   resolveBet(name, outcome) {
