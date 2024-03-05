@@ -221,6 +221,7 @@ export default class CrapsPlayer {
       }
     }
     const name = Object.keys(this.bets).find(v => v.toLowerCase() === formattedName)
+    if (typeof name === 'undefined') return `Invalid bet ("${rawName}" does not exist).`
     let raised = false
     if (this.settings.autoIncrementByUnits) {
       let relevantNum, unitIndex, settingName
@@ -260,11 +261,8 @@ export default class CrapsPlayer {
     const note = raised ? ' _(auto topped up amount)_' : ''
     if (bet > CrapsPlayer.#max) return `Cannot bet more than absolute max of ${CrapsPlayer.#max} - your bet is ${bet}${note}.`
     if (bet > this.bank) return `Not enough money - only have ${this.bank} of ${bet}${note}!`
-    if (CrapsPlayer.#minBets.includes(name)) {
-      if (CrapsPlayer.#checkMin(name, bet)) return `This bet requires minimum $${CrapsPlayer.#min}${name.startsWith('buy') || name.startsWith('lay') ? ' (+ vig 5%)' : ''}.`
-    } else if (!CrapsPlayer.#noMinBets.includes(name)) {
-      return `Invalid bet ("${name}" does not exist).`
-    }
+    if (CrapsPlayer.#minBets.includes(name) && CrapsPlayer.#checkMin(name, bet))
+      return `This bet requires minimum $${CrapsPlayer.#min}${name.startsWith('buy') || name.startsWith('lay') ? ' (+ vig 5%)' : ''}.`
     const fullName = CrapsPlayer.camelToFull(name)
     if (bet === 0 && this.bets[name] === 0) return `Bet on ${fullName} is already zero (no bet).`
     if (CrapsPlayer.point === null && name === 'come') return `Cannot bet come before point established (use pass instead).`
