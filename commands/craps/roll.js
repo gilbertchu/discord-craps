@@ -6,8 +6,8 @@ const rollDice = async function(user) {
   const { username } = user
   const lines = [];
   const outcomes = Craps.roll()
-  const pointText = Craps.point === null ? 'Come out roll' : `Point is ${Craps.point}`
-  lines.push(`**${username}** ROLLED \`[${outcomes.roll[0]}]\` \`[${outcomes.roll[1]}]\` ... (**${outcomes.sum}**) _ON: ${pointText}_ !!!`)
+  const pointText = Craps.point === null ? 'On come out roll' : `Point is ${Craps.point}`
+  lines.push(`**${username}** ROLLED \`[${outcomes.roll[0]}]\` \`[${outcomes.roll[1]}]\` ... **${outcomes.sum}** !!!\n_(${pointText})_`)
   if (outcomes.establishedPoint) lines.push(`_Established point: ${outcomes.sum}_`)
   if (outcomes.hitPoint) lines.push(`**Hit the point!**`)
   if (outcomes.sevenOut) lines.push(`Seven out.`)
