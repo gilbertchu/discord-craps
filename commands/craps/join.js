@@ -16,9 +16,9 @@ const addPlayer = async function(user) {
   return player
 }
 
-const sit = {
+const join = {
   data: new SlashCommandBuilder()
-		.setName('sit')
+		.setName('join')
 		.setDescription('Sit at the table.'),
   async execute(interaction) {
     // interaction.user is the object representing the User who ran the command
@@ -26,10 +26,10 @@ const sit = {
     // await interaction.reply(`This command was run by ${interaction.user.username}, who joined on ${interaction.member.joinedAt}.`);
     await interaction.deferReply({ephemeral: true})
     const res = await addPlayer(interaction.user)
-    const reply = res ? `Joined the table! (chips: **$${res.bank})**` : 'Already sitting at the table!'
+    const reply = res ? `Joined the table! (chips: **$${res.bank})**` : 'Already joined the table!'
     await interaction.editReply(reply)
     if (res) return `**${interaction.user.username}** joined the table (chips: **$${res.bank}**)!`
   },
 };
 
-export { sit as default }
+export { join as default }

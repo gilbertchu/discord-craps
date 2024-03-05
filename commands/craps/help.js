@@ -1,7 +1,7 @@
 import { SlashCommandBuilder } from 'discord.js'
 import CrapsPlayer from "../../libs/CrapsPlayer.mjs"
 
-const commands = '> Commands available:\n> - `/sit`\n> - `/bet <name> <amount>`\n> - `/roll`\n' +
+const commands = '> Commands available:\n> - `/join`\n> - `/leave`\n> - `/bet <name> <amount>`\n> - `/roll`\n' +
                  '> - `/status`\n> - `/summary`\n> - `/setting <name> <option>`\n> - `/help <optional_category>`\n' +
                  '> Help categories available: `commands`, `bets`, `aliases`, `settings`'
 const bets = '> Bets available: ' + CrapsPlayer.allBets.map(v => '`'+v+'`').join(', ')
