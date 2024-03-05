@@ -33,7 +33,7 @@ const roll = {
     // await interaction.reply(`This command was run by ${interaction.user.username}, who joined on ${interaction.member.joinedAt}.`);
     await interaction.deferReply({ephemeral: true})
     if (!(interaction.user.id in Craps.players)) {
-      await interaction.editReply(`_You must be sitting at the table to roll._`)
+      await interaction.editReply(`_You must join the table to roll._`)
     } else if (Craps.rolling) {
       await interaction.editReply("_Someone is already rolling._")
     } else {
