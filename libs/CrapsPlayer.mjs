@@ -217,7 +217,7 @@ export default class CrapsPlayer {
         const res = CrapsPlayer.#aliases[formattedName].map(subName => this.bet(subName, subBet)).filter(v => typeof v === 'string')
         return res.length ? res.join('\n') : ['Hard Ways', bet === 0 && combinedOld, false, bet]
       } else {
-        return this.bet(CrapsPlayer.#aliases[name], bet)
+        return this.bet(CrapsPlayer.#aliases[formattedName], bet)
       }
     }
     const name = Object.keys(this.bets).find(v => v.toLowerCase() === formattedName)
