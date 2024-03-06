@@ -12,6 +12,8 @@ You must create `config.json` in project root (see template.config.json).
 
 ## TODO
 
+_Bottom sections out of date - everything is tentative._
+
 1. Integrate discord db into app
    - Saving settings
 2. Timers, AFK handling
