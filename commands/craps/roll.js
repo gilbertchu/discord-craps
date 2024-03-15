@@ -21,6 +21,9 @@ const rollDice = async function(user) {
     await DiscordDB.ddb.setPlayerToAvailableMoney(Craps.players[playerId])
     lines.push(`> **${playerOutcome.name}**: ${playerOutcome.betOutcomes.map(v => `${formatBetOutcome(v)}`).join(' / ')}`)
   }
+  for (const rebuy of outcomes.rebuys) {
+    lines.push(rebuy)
+  }
   return lines.join('\n')
 }
 

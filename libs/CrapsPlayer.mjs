@@ -338,7 +338,11 @@ export default class CrapsPlayer {
       res = [CrapsPlayer.camelToFull(name), finalOutcome, note]
       if (name === 'pass' || name === 'dontPass') {
         // User setting: rebuy pass/don't pass on win
-        this.settings.autoRebuyPassLine || this.#adjustBet(name, 0)
+        if (this.settings.autoRebuyPassLine) {
+          res.push(`- _**${this.name}** auto rebuy ${CrapsPlayer.camelToFull(name)} $${this.bets[name]}_`)
+        } else {
+          this.#adjustBet(name, 0)
+        }
       } else if (typeof ['place', 'buy', 'lay', 'hard', 'big'].find(v => name.startsWith(v)) === 'undefined') {
         // For other non multi-roll bets, clear bet after win
         this.#adjustBet(name, 0)

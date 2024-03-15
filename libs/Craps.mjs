@@ -16,7 +16,7 @@ export default class Craps {
   }
 
   static roll() {
-    const outcomes = {}
+    const outcomes = {rebuys: []}
     const dieOne = this.#rollDie()
     const dieTwo = this.#rollDie()
     const sum = dieOne + dieTwo
@@ -50,6 +50,7 @@ export default class Craps {
         }
         const outcome = CrapsBets[name](bet)
         const res = player.resolveBet(name, outcome)
+        if (Array.isArray(res) && res.length === 4) outcomes.rebuys.push(res.pop())
         if (typeof res !== 'undefined') results.push(res)
       }
       outcomes.players[id] = {
