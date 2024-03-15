@@ -4,7 +4,7 @@ Craps on Discord
 
 ## Up and running
 
-You must create `config.json` in project root (see template.config.json).
+You must create `config.json` in project root (see `template.config.json`).
 
 - Test: `npm test`
 - Test with REPL: `npm run test-repl`
@@ -19,7 +19,7 @@ _Bottom sections out of date - everything is tentative._
 2. Timers, AFK handling
 3. App readiness
    - Disable sit until client ready + db loaded
-   - Disable roll while resolving actions
+   - ~~Disable roll while resolving actions~~
    - etc.
 
 ### Considerations
