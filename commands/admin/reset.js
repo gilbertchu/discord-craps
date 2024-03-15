@@ -30,7 +30,7 @@ const reset = {
         DiscordDB.ddb.set(userId, amount)
         await DiscordDB.ddb.update()
         if (userId in Craps.players) Craps.players[userId].bank = amount
-        content = `Reset user ${userId} bank to ${amount}.`
+        content = `Reset user \`${userId}\` bank to $${amount}.`
         // TODO - do we want to check if they are sitting at the table and also reset their CrapsPlayer bank?
         // TODO - should we announce the change to the whole channel?
       } else {
